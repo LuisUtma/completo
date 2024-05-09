@@ -870,7 +870,7 @@ body.mobile-nav-active #mobile-nav-toggle {
 --------------------------------*/
 
 #contact {
-  flex-direction: row-reverse;
+  flex-direction:row-reverse;
   padding: 30px 0;
   display: flex;
   flex-wrap: wrap;
@@ -997,11 +997,14 @@ margin-top: 120px;
 @media (max-width: 768px) {
   #contact .contact-info,
   #contact .form {
+   
+    
     flex: 150%;
    /* Resetear el margen para el diseño de una sola columna en dispositivos móviles */
   }
 
-  #contact #google-map {
+  #contact  {
+   flex-direction: column-reverse;
    /* Cambiar el orden del mapa de vuelta a la izquierda en dispositivos móviles */
   }
 }
