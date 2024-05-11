@@ -52,7 +52,7 @@ h6 {
   border-radius: 2px;
   right: 15px;
   bottom: 15px;
-  transition: background 0.5s;
+  transition: background 0.2s;
 }
 
 .back-to-top:focus {

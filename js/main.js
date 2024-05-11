@@ -11,7 +11,7 @@ jQuery(document).ready(function ($) {
   $('.back-to-top').click(function () {
     $('html, body').animate({
       scrollTop: 0
-    }, 500, 'easeInOutExpo');
+    }, 1500, 'easeInOutExpo');
     return false;
   });
 
@@ -98,7 +98,7 @@ jQuery(document).ready(function ($) {
 
         $('html, body').animate({
           scrollTop: target.offset().top - top_space
-        }, 1500, 'easeInOutExpo');
+        }, 500, 'easeInOutExpo');
 
         if ($(this).parents('.nav-menu').length) {
           $('.nav-menu .menu-active').removeClass('menu-active');
