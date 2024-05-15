@@ -1,3 +1,5 @@
+
+
 jQuery(document).ready(function ($) {
 
   // Back to top button
@@ -40,47 +42,79 @@ jQuery(document).ready(function ($) {
     },
     speed: 400
   });
+  
+  function createMobileNav() {
+    // Verifica si existe el contenedor del menú
+    if ($('#nav-menu-container').length) {
+        // Clona el menú y asigna un nuevo ID
+        var $mobile_nav = $('#nav-menu-container').clone().prop({
+            id: 'mobile-nav'
+        });
 
-  // Mobile Navigation
-  if ($('#nav-menu-container').length) {
-    var $mobile_nav = $('#nav-menu-container').clone().prop({
-      id: 'mobile-nav'
-    });
-    $mobile_nav.find('> ul').attr({
-      'class': '',
-      'id': ''
-    });
-    $('body').append($mobile_nav);
-    $('body').prepend('<button type="button" id="mobile-nav-toggle"><i class="fa fa-bars"></i></button>');
-    $('body').append('<div id="mobile-body-overly"></div>');
-    $('#mobile-nav').find('.menu-has-children').prepend('<i class="fa fa-chevron-down"></i>');
+        // Elimina la clase y asigna un nuevo ID al primer nivel de la lista
+        $mobile_nav.find('> ul').attr({
+            'class': '',
+            'id': 'mobile-nav-ul'
+        });
 
-    $(document).on('click', '.menu-has-children i', function (e) {
-      $(this).next().toggleClass('menu-item-active');
-      $(this).nextAll('ul').eq(0).slideToggle();
-      $(this).toggleClass("fa-chevron-up fa-chevron-down");
-    });
 
-    $(document).on('click', '#mobile-nav-toggle', function (e) {
-      $('body').toggleClass('mobile-nav-active');
-      $('#mobile-nav-toggle i').toggleClass('fa-times fa-bars');
-      $('#mobile-body-overly').toggle();
-    });
+        // Agrega el menú móvil al encabezado (o cualquier otro contenedor que prefieras)
+        $('header').append($mobile_nav);
 
-    $(document).click(function (e) {
-      var container = $("#mobile-nav, #mobile-nav-toggle");
-      if (!container.is(e.target) && container.has(e.target).length === 0) {
-        if ($('body').hasClass('mobile-nav-active')) {
-          $('body').removeClass('mobile-nav-active');
-          $('#mobile-nav-toggle i').toggleClass('fa-times fa-bars');
-          $('#mobile-body-overly').fadeOut();
-        }
-      }
-    });
-  } else if ($("#mobile-nav, #mobile-nav-toggle").length) {
-    $("#mobile-nav, #mobile-nav-toggle").hide();
-  }
+        // Agrega el botón de toggle al principio del body
+        $('body').prepend('<button type="button" id="mobile-nav-toggle"><i class="fa fa-bars"></i></button>');
 
+        // Agrega un overlay al final del body
+        $('body').append('<div id="mobile-body-overly"></div>');
+
+        // Agrega flechas de despliegue a los elementos con submenús
+        $('#mobile-nav').find('.menu-has-children').prepend('<i class="fa fa-chevron-down"></i>');
+
+        // Maneja los eventos de clic en los íconos de flecha para mostrar/ocultar submenús
+        $(document).on('click', '.menu-has-children i', function(e) {
+            $(this).next().toggleClass('menu-item-active');
+            $(this).nextAll('ul').eq(0).slideToggle();
+            $(this).toggleClass("fa-chevron-up fa-chevron-down");
+        });
+
+        // Maneja el evento de clic en el botón de toggle para mostrar/ocultar el menú móvil
+        $(document).on('click', '#mobile-nav-toggle', function(e) {
+            $('body').toggleClass('mobile-nav-active');
+            $('#mobile-nav-toggle i').toggleClass('fa-times fa-bars');
+            $('#mobile-body-overly').toggle();
+        });
+
+        // Maneja el evento de clic en el enlace "Change Language" dentro del menú móvil
+      
+
+        // Maneja el evento de clic fuera del menú para cerrarlo
+        $(document).click(function(e) {
+            var container = $("#mobile-nav, #mobile-nav-toggle");
+            if (!container.is(e.target) && container.has(e.target).length === 0) {
+                if ($('body').hasClass('mobile-nav-active')) {
+                    $('body').removeClass('mobile-nav-active');
+                    $('#mobile-nav-toggle i').toggleClass('fa-times fa-bars');
+                    $('#mobile-body-overly').fadeOut();
+                }
+            }
+        });
+    } else if ($("#mobile-nav, #mobile-nav-toggle").length) {
+        // Oculta el menú móvil si no existe el contenedor del menú
+        $("#mobile-nav, #mobile-nav-toggle").hide();
+    }
+}
+
+
+
+
+
+
+  // Llama a la función cuando el documento esté completamente cargado
+  $(document).ready(function() {
+    createMobileNav();
+  });
+  
+  
   // Smooth scroll for the menu and links with .scrollto classes
   $('.nav-menu a, #mobile-nav a, .scrollto').on('click', function () {
     if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') && location.hostname == this.hostname) {
@@ -172,3 +206,27 @@ jQuery(document).ready(function ($) {
 
 
 });
+
+
+function printMenuClasses() {
+  // Espera a que el documento esté listo
+  $(document).ready(function() {
+    // Espera a que el menú móvil esté listo
+    $(document).on('click', '#mobile-nav-toggle', function() {
+      // Itera sobre todos los elementos del menú y muestra sus clases
+      $('#mobile-nav').find('*').each(function() {
+        var classes = $(this).attr('class');
+        if (classes) {
+          console.log("Clases del elemento:", classes);
+        }
+      });
+    });
+  });
+}
+
+// Llama a la función cuando el documento esté listo
+printMenuClasses();
+
+
+
+

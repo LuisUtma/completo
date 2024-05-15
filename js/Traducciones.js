@@ -1,5 +1,7 @@
 const traducciones = {
     "es": {
+        
+      
         "AboutUs": "Sobre Nosotros",
         "Services": "Servicios",
         "Contact": "Contacto",
@@ -54,6 +56,8 @@ const traducciones = {
 
     },
     "en": {
+
+        "mobile-nav Idioma": "Languaje",
         "AboutUs": "About us",
         "Services": "Services",
         "Contact": "Contact",
@@ -100,7 +104,8 @@ const traducciones = {
         "openModalBtn3": "Galery",
         "openModalBtn4": "Galery",
         "openModalBtn5": "Galery",
-        "openModalBtn6": "Galery"
+        "openModalBtn6": "Galery",
+        
 
     
     }
@@ -125,33 +130,58 @@ const imagenes = {
 
 
 
+
+
+
+
+
+
+
+
 let idiomaActual = "es"; // El idioma inicial de la página
 
-
-
-
-
-
-
-
 function cambiarIdioma() {
-    // Determinar el nuevo idioma
+    // Cambiar el idioma actual
     idiomaActual = (idiomaActual === "es") ? "en" : "es";
 
-    // Cambiar los textos según el idioma seleccionado
+    // Verificar el idioma y traducir los elementos según corresponda
+    if (idiomaActual === 'es') { // Por ejemplo, 'es' para español
+        $('#mobile-nav #Idioma').text('Cambiar Idioma');
+        $('#mobile-nav #AboutUs').text('Sobre Nosotros');
+        $('#mobile-nav #Services').text('Servicios');
+        $('#mobile-nav #Contact').text('Contacto');
+        $('#mobile-nav #bandera').attr('src', imagenes.es.bandera);
+        // Aquí puedes seguir añadiendo más traducciones según necesites
+    } else if (idiomaActual === 'en') { // Por ejemplo, 'en' para inglés
+        $('#mobile-nav #Idioma').text('Change Language');
+        $('#mobile-nav #AboutUs').text('About Us');
+        $('#mobile-nav #Services').text('Services');
+        $('#mobile-nav #Contact').text('Contact');
+        $('#mobile-nav #bandera').attr('src', imagenes.en.bandera);
+        // Aquí puedes seguir añadiendo más traducciones según necesites
+    }
+
+    // Cambiar textos y placeholders
     for (const key in traducciones[idiomaActual]) {
         if (traducciones[idiomaActual].hasOwnProperty(key)) {
-            document.getElementById(key).textContent = traducciones[idiomaActual][key];
-            document.getElementById(key).setAttribute("placeholder",traducciones[idiomaActual][key]);
-            document.getElementById("myImage").src = imagenes[idiomaActual].myImage;
-            document.getElementById("bandera").src = imagenes[idiomaActual].bandera;
+            const elemento = document.getElementById(key);
+            if (elemento) {
+                elemento.textContent = traducciones[idiomaActual][key];
+                // Asegúrate de que solo estableces el placeholder si el elemento es un input
+                if (elemento.tagName === "INPUT") {
+                    elemento.setAttribute("placeholder", traducciones[idiomaActual][key]);
+                }
+            }
         }
     }
 
+    // Cambiar imágenes
+    document.getElementById("myImage").src = imagenes[idiomaActual].myImage;
+    document.getElementById("bandera").src = imagenes[idiomaActual].bandera;
 
-    // Cambiar la imagen según el idioma seleccionado
-
+    // Aquí puedes agregar cualquier otra lógica que necesites para actualizar el UI
 }
+
 
 
 
@@ -166,3 +196,4 @@ $(document).ready(function() {
       $('.custom-file-label').text(fileName || 'Seleccionar archivo');
     });
   });
+  
