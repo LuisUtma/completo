@@ -40,7 +40,7 @@ const traducciones = {
         subject: "Asunto",
        "message": "Mensaje",
         "AddFile":"Adjuntar Archivo",
-        "requirements":"Si el documento es mayor a 10 mb, madarlo directamente por el correo.",
+        "requirements":"Si el documento es mayor a 10 mb, mandarlo directamente por el correo.",
         "attachments": "Escoger Archivo",
         "sendmessageF": "Enviar Mensaje",
         "CotizaF" : "Cotiza tu Proyecto",
